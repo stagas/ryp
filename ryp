@@ -85,7 +85,8 @@ install () {
     | egrep -o 'http:.*' \
     | xargs $RYP fetch \
     | (cd ./node_modules/.tmp &>/dev/null ; tar -zxf -)
-  mv ./node_modules/.tmp/* ./node_modules/$pkg
+  mkdir ./node_modules/$pkg
+  cp -R ./node_modules/.tmp/package/* ./node_modules/$pkg/
   curl -s http://registry.npmjs.org/$pkg/latest \
     > ./node_modules/$pkg/package.json
   rm -rf ./node_modules/.tmp
